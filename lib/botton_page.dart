@@ -84,14 +84,28 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ImageSlideshow(
-      autoPlayInterval: 3000,
-      isLoop: true,
-      children: List.generate(
-        images.length,
-        (index) => Image(
-          image: NetworkImage(images[index]),
+    return Column(
+      children: [
+        ImageSlideshow(
+          autoPlayInterval: 3000,
+          isLoop: true,
+          children: List.generate(
+              images.length, (index) => buildSlideCard(image: images[index])),
         ),
+      ],
+    );
+  }
+
+  Widget buildSlideCard({required String image}) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        height: 200,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            image:
+                DecorationImage(fit: BoxFit.cover, image: NetworkImage(image))),
       ),
     );
   }
